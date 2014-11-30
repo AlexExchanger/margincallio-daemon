@@ -1,0 +1,947 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"sy",
+				"system_handler"
+			],
+			[
+				"de",
+				"defmod	defmodule"
+			],
+			[
+				"sta",
+				"start_link"
+			],
+			[
+				"to",
+				"today"
+			],
+			[
+				"dev",
+				"device_data_decrypted"
+			],
+			[
+				"dream_",
+				"dream_id"
+			],
+			[
+				"dec",
+				"decrypt_device_data"
+			],
+			[
+				"devi",
+				"device_data"
+			],
+			[
+				"get",
+				"get_by_id"
+			],
+			[
+				"no",
+				"nothing_is_planned"
+			],
+			[
+				"us",
+				"user_new"
+			],
+			[
+				"user",
+				"user_new"
+			],
+			[
+				"today_",
+				"today_off"
+			],
+			[
+				"use",
+				"user_id"
+			],
+			[
+				"toda",
+				"today_dream_id"
+			],
+			[
+				"ch",
+				"check_plan"
+			],
+			[
+				"che",
+				"check_dream"
+			],
+			[
+				"ge",
+				"get_by_id"
+			],
+			[
+				"today",
+				"today_off"
+			],
+			[
+				"tod",
+				"today_on"
+			],
+			[
+				"dream",
+				"dream_pub_id"
+			],
+			[
+				"dream_pub_i",
+				"dream_pub_ids"
+			],
+			[
+				"res",
+				"result"
+			],
+			[
+				"id",
+				"id_to_pub_id"
+			],
+			[
+				"dele",
+				"deleted"
+			],
+			[
+				"u",
+				"user_id"
+			],
+			[
+				"inco",
+				"incorrect_pub_id"
+			],
+			[
+				"plan_",
+				"plan_del"
+			],
+			[
+				"pl",
+				"plan"
+			],
+			[
+				"in",
+				"insert"
+			],
+			[
+				"com",
+				"comment"
+			],
+			[
+				"pu",
+				"pub_id"
+			],
+			[
+				"dream_w",
+				"dream_without_id"
+			],
+			[
+				"dream_p",
+				"dream_publify"
+			],
+			[
+				"dream_pu",
+				"dream_pub_id"
+			],
+			[
+				"logo",
+				"logo"
+			],
+			[
+				"device_",
+				"device_data"
+			],
+			[
+				"login",
+				"login_data"
+			],
+			[
+				"ne",
+				"new_email"
+			],
+			[
+				"edi",
+				"edit_email"
+			],
+			[
+				"al",
+				"already_taken_username"
+			],
+			[
+				"lo",
+				"logout"
+			],
+			[
+				"da",
+				"data2"
+			],
+			[
+				"inc",
+				"incorrect"
+			],
+			[
+				"se",
+				"session_id"
+			],
+			[
+				"s",
+				"session_id"
+			],
+			[
+				"ac",
+				"access"
+			],
+			[
+				"f",
+				"from"
+			],
+			[
+				"pa",
+				"password"
+			],
+			[
+				"device",
+				"device_id"
+			],
+			[
+				"vali",
+				"valid_rule"
+			],
+			[
+				"ra",
+				"rand_bytes"
+			],
+			[
+				"gen_",
+				"gen_devices"
+			],
+			[
+				"d",
+				"def	def"
+			],
+			[
+				"defmo",
+				"defmodule"
+			],
+			[
+				"cle",
+				"clean_data"
+			],
+			[
+				"va",
+				"validate_results"
+			],
+			[
+				"validate",
+				"validate_errors"
+			],
+			[
+				"clean",
+				"clean_values"
+			],
+			[
+				"commn",
+				"command_spec"
+			],
+			[
+				"req",
+				"request"
+			],
+			[
+				"Re",
+				"Resp"
+			],
+			[
+				"mi",
+				"mimes"
+			],
+			[
+				"n2o",
+				"n2o_dynalo"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "lib/daemon.ex",
+			"settings":
+			{
+				"buffer_size": 2664,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "test/daemon_test.exs",
+			"settings":
+			{
+				"buffer_size": 97,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "lib/models.ex",
+			"settings":
+			{
+				"buffer_size": 399,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "mix.exs",
+			"settings":
+			{
+				"buffer_size": 748,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 47.0,
+		"selected_items":
+		[
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"sublime",
+				"Sublimerge: Compare to Revision..."
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"remo",
+				"Package Control: Remove Package"
+			],
+			[
+				"Package Control: in",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: i",
+				"Package Control: Install Package"
+			],
+			[
+				"C",
+				"CTags: Rebuild Tags"
+			],
+			[
+				"Ctags",
+				"CTags: Rebuild Tags"
+			],
+			[
+				"",
+				"CTags: Show Symbols (all)"
+			],
+			[
+				"Snippet: ",
+				"Snippet: receive"
+			],
+			[
+				"Insta",
+				"Package Control: Install Package"
+			],
+			[
+				"Pa",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 458.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/Users/insider/Dropbox/mac/projectos/Rocketbtc/Development/Daemon",
+		"/Users/insider/Dropbox/mac/projectos/Rocketbtc/Development/Daemon/daemon",
+		"/Users/insider/Dropbox/mac/projectos/Rocketbtc/Development/Daemon/daemon/config",
+		"/Users/insider/Dropbox/mac/projectos/Rocketbtc/Development/Daemon/daemon/deps",
+		"/Users/insider/Dropbox/mac/projectos/Rocketbtc/Development/Daemon/daemon/lib",
+		"/Users/insider/Dropbox/mac/projectos/Rocketbtc/Development/Daemon/daemon/test"
+	],
+	"file_history":
+	[
+		"/Users/insider/Dropbox/mac/projectos/Rocketbtc/Development/Daemon/daemon/README.md",
+		"/Users/insider/Dropbox/mac/projectos/Rocketbtc/Development/Daemon/daemon/_build/dev/lib/jazz/ebin/Elixir.Jazz.Encoder.List.beam",
+		"/Users/insider/Dropbox/mac/projectos/Rocketbtc/Development/Daemon/daemon/deps/ecto/lib/ecto/associations/preloader.ex",
+		"/Users/insider/Dropbox/mac/projectos/Rocketbtc/Development/Daemon/daemon/test/test_server.ex",
+		"/Users/insider/Dropbox/mac/projectos/Rocketbtc/Development/Daemon/daemon/lib/models.ex",
+		"/Users/insider/Dropbox/mac/projectos/Luciding/elixir_backend/deps/cowboy/AUTHORS",
+		"/Users/insider/Dropbox/mac/projectos/Luciding/elixir_backend/lib/sample/state.ex",
+		"/Users/insider/Dropbox/mac/projectos/Luciding/elixir_backend/deps/n2o/src/protocols/n2o_heart.erl",
+		"/Users/insider/Dropbox/mac/projectos/Luciding/elixir_backend/n2o_text.erl",
+		"/Users/insider/Dropbox/mac/projectos/Luciding/elixir_backend/deps/n2o/src/endpoints/n2o_websocket.erl",
+		"/Users/insider/Dropbox/mac/projectos/Luciding/elixir_backend/deps/n2o/src/protocols/n2o_text.erl",
+		"/Users/insider/Desktop/codes.py",
+		"/Users/insider/Dropbox/mac/projectos/Luciding/elixir_backend/lib/sample/structs.ex",
+		"/Users/insider/Dropbox/mac/projectos/Luciding/ws_test.py",
+		"/Users/insider/Dropbox/mac/projectos/Luciding/elixir_backend/src/sample.app.src",
+		"/Users/insider/Dropbox/mac/projectos/Luciding/elixir_backend/mix.lock",
+		"/Users/insider/Dropbox/mac/projectos/Luciding/elixir_backend/lib/sample/db.ex",
+		"/Users/insider/Dropbox/mac/projectos/Luciding/elixir_backend/deps/n2o/src/wf.erl",
+		"/Users/insider/Dropbox/mac/projectos/Luciding/elixir_backend/deps/n2o/src/handlers/n2o_log.erl",
+		"/Users/insider/Dropbox/mac/projectos/Luciding/elixir_backend/log/console.log",
+		"/Users/insider/Dropbox/mac/projectos/Luciding/elixir_backend/log/crash.log",
+		"/Users/insider/Dropbox/mac/projectos/Luciding/elixir_backend/log/error.log",
+		"/Users/insider/Dropbox/mac/projectos/Luciding/elixir_backend/deps/erlydtl/tests/src/sources_parser_unittests.erl",
+		"/Users/insider/Dropbox/mac/projectos/Luciding/elixir_backend/deps/goldrush/ebin/glc.beam",
+		"/Users/insider/Dropbox/mac/projectos/Luciding/elixir_backend/deps/cowboy/test/http_SUITE_data/http_init_shutdown.erl",
+		"/Users/insider/Dropbox/mac/projectos/Luciding/elixir_backend/deps/erlydtl/README_I18N",
+		"/Users/insider/Dropbox/mac/projectos/Luciding/elixir_backend/deps/n2o/priv/utf8.js",
+		"/Users/insider/Dropbox/mac/projectos/Luciding/elixir_backend/deps/cowboy/test/http_SUITE_data/rest_expires.erl",
+		"/Users/insider/Dropbox/mac/projectos/Luciding/elixir_backend/README.md",
+		"/Users/insider/Dropbox/mac/projectos/Luciding/elixir_backend/deps/n2o/ebin/n2o_websocket.beam",
+		"/Users/insider/Dropbox/mac/projectos/Luciding/elixir_backend/deps/n2o/src/endpoints/n2o_document.erl",
+		"/Users/insider/Dropbox/mac/projectos/Luciding/elixir_backend/deps/n2o/samples/apps/n2o_sample/priv/static/N2O.svg",
+		"/Users/insider/Dropbox/mac/projectos/Luciding/elixir_backend/lib/sample/n2o.ex",
+		"/Users/insider/Dropbox/mac/projectos/Luciding/elixir_backend/_build/dev/lib/sample/ebin/Elixir.N2O.beam",
+		"/Users/insider/Dropbox/mac/projectos/Luciding/elixir_backend/lib/sample/test.ex",
+		"/Users/insider/Dropbox/mac/projectos/Luciding/elixir_backend/deps/derp/lib/derp/tty.ex",
+		"/Users/insider/Dropbox/mac/projectos/Luciding/elixir_backend/deps/derp/lib/derp.ex",
+		"/Users/insider/Dropbox/mac/projectos/Luciding/elixir_backend/lib/sample/config.exs",
+		"/Users/insider/Dropbox/mac/projectos/Luciding/elixir_backend/lib/config.exs",
+		"/Users/insider/Dropbox/mac/projectos/Elixir/n2o/deps/n2o/include/wf.hrl",
+		"/Users/insider/Dropbox/mac/projectos/Elixir/n2o/deps/n2o/src/wf_core.erl",
+		"/Users/insider/Dropbox/mac/projectos/Elixir/n2o/deps/n2o/src/endpoints/n2o_document.erl",
+		"/Users/insider/Dropbox/mac/projectos/Elixir/n2o/lib/priv/templates/index.html",
+		"/Users/insider/Dropbox/mac/projectos/Elixir/n2o/lib/priv/static/spa/spa.htm",
+		"/Users/insider/Dropbox/mac/projectos/Elixir/n2o/lib/sample/index.ex",
+		"/Users/insider/Dropbox/mac/projectos/Elixir/n2o/deps/n2o/src/wf.erl",
+		"/Users/insider/Dropbox/mac/projectos/Elixir/n2o/mix.exs",
+		"/Users/insider/Dropbox/mac/projectos/Elixir/n2o/deps/genx/lib/ct.ex",
+		"/Users/insider/Dropbox/mac/projectos/Elixir/n2o/deps/n2o/samples/apps/n2o_sample/priv/static/N2O.svg",
+		"/Users/insider/Dropbox/mac/projectos/Elixir/n2o/deps/n2o/ebin/wf_core.beam",
+		"/Users/insider/Dropbox/mac/projectos/Elixir/n2o/deps/n2o/ebin/wf_context.beam",
+		"/Users/insider/Dropbox/mac/projectos/Elixir/n2o/deps/n2o/ebin/wf.beam",
+		"/Users/insider/Dropbox/mac/projectos/Elixir/n2o/deps/n2o/src/endpoints/cowboy/n2o_cowboy.erl",
+		"/Users/insider/Dropbox/mac/projectos/Elixir/n2o/deps/cowboy/src/cowboy_req.erl",
+		"/Users/insider/Dropbox/mac/projectos/Elixir/n2o/deps/cowboy/ebin/cowboy_app.beam",
+		"/Users/insider/Dropbox/mac/projectos/Elixir/n2o/deps/cowboy/src/cowboy.erl",
+		"/Users/insider/Dropbox/mac/projectos/Elixir/n2o/deps/cowboy/manual/cowboy.md",
+		"/Users/insider/Dropbox/mac/projectos/Elixir/n2o/deps/cowboy/ebin/cowboy.beam",
+		"/Users/insider/Dropbox/mac/projectos/Elixir/n2o/deps/cowboy/ebin/cowboy.app",
+		"/Users/insider/Dropbox/mac/projectos/Elixir/n2o/deps/cowboy/ebin/cowboy_websocket.beam",
+		"/Users/insider/Dropbox/mac/projectos/Elixir/n2o/deps/cowboy/CONTRIBUTING.md",
+		"/Users/insider/Dropbox/mac/projectos/Elixir/n2o/deps/cowboy/CHANGELOG.md",
+		"/Users/insider/Dropbox/mac/projectos/Elixir/n2o/.gitignore",
+		"/Users/insider/Dropbox/mac/projectos/Elixir/n2o/rebar.config",
+		"/Users/insider/Dropbox/mac/projectos/Elixir/n2o/mix.lock",
+		"/Users/insider/Library/Application Support/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+		"/Users/insider/Dropbox/mac/projectos/Elixir/n2o/lib/sample/sup.ex",
+		"/Users/insider/Dropbox/mac/projectos/Elixir/n2o/deps/mad/rebar.config",
+		"/Users/insider/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/Users/insider/Library/Application Support/Sublime Text 3/Packages/Tabright/Tabright.sublime-settings",
+		"/Users/insider/Library/Application Support/Sublime Text 3/Packages/User/Tabright.sublime-settings",
+		"/Users/insider/Dropbox/mac/projectos/Elixir/n2o/deps/erlydtl/README_I18N",
+		"/Users/insider/Dropbox/mac/projectos/Elixir/n2o/deps/n2o/src/endpoints/cowboy/bullet_handler.erl",
+		"/Users/insider/Dropbox/mac/projectos/Elixir/n2o/deps/n2o/src/endpoints/cowboy/n2o_dynalo.erl",
+		"/Users/insider/Dropbox/mac/projectos/Elixir/n2o/lib/priv/static2/nitrogen/bullet.js",
+		"/Users/insider/Dropbox/mac/projectos/Elixir/n2o/lib/priv/static/n2o/bullet.js",
+		"/Users/insider/Dropbox/mac/projectos/Elixir/n2o/deps/n2o/ebin/bullet_handler.beam",
+		"/Users/insider/Dropbox/mac/projectos/Elixir/n2o/deps/n2o/priv/bullet.js",
+		"/Users/insider/Dropbox/mac/projectos/Elixir/n2o/deps/erlydtl/tests/input/base",
+		"/Users/insider/Dropbox/mac/projectos/Elixir/n2o/deps/n2o/ebin/n2o_dynalo.beam",
+		"/Users/insider/Dropbox/mac/projectos/Elixir/n2o/deps/cowboy/examples/web_server/src/directory_handler.erl",
+		"/Users/insider/Dropbox/mac/projectos/Elixir/n2o/deps/n2o/ebin/n2o_document.beam",
+		"/Users/insider/Dropbox/mac/projectos/Elixir/n2o/deps/n2o/test/n2o_SUITE.erl",
+		"/Users/insider/Dropbox/mac/projectos/Elixir/n2o/deps/n2o/ebin/n2o_cowboy.beam",
+		"/Users/insider/Dropbox/mac/projectos/Elixir/n2o/deps/n2o/ebin/n2o_client.beam",
+		"/Users/insider/Dropbox/mac/projectos/Elixir/n2o/_build/dev/lib/n2o_elixir/ebin/n2o_elixir.app",
+		"/Users/insider/Dropbox/mac/projectos/Elixir/n2o/deps/cowboy/src/cowboy_protocol.erl",
+		"/Users/insider/Library/Application Support/Sublime Text 3/Packages/Default/Default (OSX).sublime-keymap",
+		"/Users/insider/Library/Application Support/Sublime Text 3/Packages/User/Default (OSX).sublime-keymap",
+		"/Users/insider/Dropbox/mac/projectos/Elixir/n2o/deps/cowboy/LICENSE",
+		"/Users/insider/Dropbox/mac/projectos/Elixir/n2o/deps/cowboy/manual/cowboy_protocol.md",
+		"/Users/insider/Dropbox/mac/projectos/Elixir/n2o/deps/cowboy/ebin/cowboy_protocol.beam",
+		"/Users/insider/Dropbox/mac/projectos/Elixir/n2o/deps/cowboy/guide/http_req_life.md",
+		"/Users/insider/Dropbox/mac/projectos/Elixir/n2o/deps/erlydtl/tests/expect/for_tuple",
+		"/Users/insider/Dropbox/mac/projectos/Elixir/n2o/deps/cowboy/test/ws_SUITE_data/ws_upgrade_with_opts.erl",
+		"/Users/insider/Dropbox/mac/projectos/Elixir/n2o/deps/n2o/priv/utf8.js",
+		"/Users/insider/Dropbox/mac/projectos/Elixir/n2o/src/sample.app.src",
+		"/Users/insider/Dropbox/mac/projectos/Elixir/first/lib/first2.ex",
+		"/Users/insider/Library/Application Support/Sublime Text 3/Packages/User/CTags.sublime-settings",
+		"/Users/insider/Dropbox/mac/projectos/Elixir/first/first.sublime-project",
+		"/usr/local/Cellar/elixir/1.0.0/lib/.tags_sorted_by_file",
+		"/Users/insider/Library/Application Support/Sublime Text 3/Packages/User/Elixir.sublime-settings",
+		"/Users/insider/Library/Application Support/Sublime Text 3/Packages/User/Distraction Free.sublime-settings",
+		"/Users/insider/Dropbox/mac/projectos/Elixir/first/mix.exs",
+		"/Users/insider/Dropbox/mac/projectos/Elixir/first/.idea/copyright/profiles_settings.xml",
+		"/Users/insider/Dropbox/mac/projectos/Elixir/first/.idea/workspace.xml",
+		"/Users/insider/Dropbox/mac/projectos/Elixir/first/.idea/first.iml",
+		"/Users/insider/Dropbox/mac/projectos/Elixir/first/tags",
+		"/Users/insider/Library/Application Support/Sublime Text 3/Packages/CTags/CTags.sublime-settings",
+		"/Users/insider/Dropbox/mac/projectos/Elixir/first/config/config.exs",
+		"/Users/insider/Dropbox/mac/projectos/Luciding/backend2/rebar.config",
+		"/Users/insider/Downloads/torrent/Navicat/Keygen.app/Contents/Info.plist",
+		"/Users/insider/Downloads/torrent/Navicat/Keygen.app/Contents/PkgInfo",
+		"/Volumes/NO NAME/Personal/keys.txt",
+		"/Volumes/NO NAME/BitBull/keys.txt",
+		"/Volumes/NO NAME/School/keys.txt",
+		"/Volumes/NO NAME/School/kids_keys.txt",
+		"/Volumes/Adobe Flash Professional CS6/Crack/CS6 Master Collection Crack.txt",
+		"/Users/insider/Downloads/Flash/Activation link",
+		"/Users/insider/Dropbox/mac/projectos/Rocketbtc/Development/source_actual/core/protected/modules/api/controllers/V1Controller.php",
+		"/Users/insider/Dropbox/mac/projectos/Rocketbtc/Development/source_actual/core/protected/modules/api/controllers/V1UrlRule.php",
+		"/Users/insider/Dropbox/mac/projectos/Rocketbtc/Development/source_actual/core/protected/modules/api/controllers/ApiController.php",
+		"/Users/insider/Dropbox/mac/projectos/Rocketbtc/Development/source_actual/core/protected/models/Engine.php",
+		"/Users/insider/Dropbox/mac/projectos/Rocketbtc/Development/source_actual/core/protected/modules/traderAccountant/controllers/AccountController.php",
+		"/Users/insider/Dropbox/mac/projectos/Rocketbtc/Development/source_actual/core/protected/modules/traderAccountant/TraderAccountantModule.php",
+		"/Users/insider/Dropbox/mac/projectos/Rocketbtc/Development/source_actual/core/protected/modules/engine/controllers/ProxyController.php",
+		"/Users/insider/Dropbox/mac/projectos/Rocketbtc/Development/source_actual/core/protected/modules/engine/controllers/RuleController.php",
+		"/Users/insider/Dropbox/mac/projectos/Rocketbtc/Development/source_actual/core/protected/modules/engine/controllers/ControlController.php"
+	],
+	"find":
+	{
+		"height": 23.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+			"",
+			"/Users/insider/Dropbox/mac/projectos/Rocketbtc/Development/source_actual/core",
+			"/Users/insider/Dropbox/mac/projectos/Rocketbtc/Development/core",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"]]),\n",
+			":[",
+			"},\n",
+			"user_updated",
+			"User.force_login(user),",
+			"force_login",
+			"ok(%{session_id: session_id})",
+			"session_id = force_login(user),",
+			"secret_code",
+			"w",
+			"W",
+			"w",
+			"password",
+			"edit_password",
+			"password",
+			"username",
+			"def command_spec(\"add_username\") do\n        [  \n            %{access: [:user], status: [:new], params: [\n                %{name: \"username\", valid_rule: :username},\n            ]},\n        ]\n    end",
+			"put",
+			"get",
+			"gen_random",
+			"status",
+			"valid",
+			"data",
+			"specs",
+			"%{access: [:user, :admin], status[:new], data: [\n                %{name: \"dev_id\", valid: :dev_id}\n            ]}",
+			"invite",
+			":",
+			"        ",
+			":",
+			"LOGGER",
+			"дщп",
+			"n2o_io",
+			"n2o_log",
+			"erroring",
+			"List.from_char_data!",
+			"String.from_char_data!",
+			"MixConfig",
+			"mimes",
+			"bridge",
+			"req",
+			"path",
+			"_build",
+			"inli",
+			"tab",
+			"mad",
+			"%{\"",
+			"\"},\n",
+			"\"}\n",
+			"rest_init",
+			"()]},\n",
+			"n2o_elixir",
+			"Elixir.Sample.Routes",
+			"command",
+			"start_http",
+			"{socket,#Port",
+			"Record",
+			"  	{:",
+			"http_req",
+			"cx",
+			"elixir_scope",
+			"scope",
+			"elixir",
+			"elixir_scope",
+			":elixir_scope",
+			"http_req",
+			"elixir",
+			"scope",
+			"defrecord",
+			"delete",
+			"\"",
+			"LSOpenURLsWithRole",
+			"фывфывофы",
+			"/s",
+			"Realplexor",
+			"dklab",
+			"realplexor",
+			"errors",
+			"platon",
+			"fedo",
+			"platon",
+			"int",
+			"mycel",
+			"testdomain.com",
+			"rest"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			": [",
+			"User.force_login(user)",
+			"User.force_login",
+			"ok(login_data)",
+			"login_data = force_login(user),",
+			"secret_key",
+			"Process.put",
+			"Process.get",
+			"dev_id",
+			" -> ",
+			"",
+			"to_string",
+			"Record.defrecord",
+			"'",
+			"stock.bit"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 2,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "lib/daemon.ex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2664,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								735,
+								735
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Elixir/Syntaxes/Elixir.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "test/daemon_test.exs",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 97,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								92,
+								92
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Elixir/Syntaxes/Elixir.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "lib/models.ex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 399,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								395,
+								395
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Elixir/Syntaxes/Elixir.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "mix.exs",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 748,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								731,
+								731
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Elixir/Syntaxes/Elixir.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 23.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 100.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.git":
+	{
+		"height": 100.0
+	},
+	"project": "daemon.sublime-project",
+	"replace":
+	{
+		"height": 42.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"n2o_we",
+				"deps/n2o/src/endpoints/n2o_websocket.erl"
+			],
+			[
+				"n2o_do",
+				"deps/n2o/src/endpoints/n2o_document.erl"
+			],
+			[
+				"wf_core",
+				"deps/n2o/src/wf_core.erl"
+			],
+			[
+				"wf.",
+				"deps/n2o/include/wf.hrl"
+			],
+			[
+				"wf",
+				"deps/n2o/src/wf.erl"
+			],
+			[
+				"cowboy_req",
+				"deps/cowboy/src/cowboy_req.erl"
+			],
+			[
+				"n2o_co",
+				"deps/n2o/src/endpoints/cowboy/n2o_cowboy.erl"
+			],
+			[
+				"cowboy",
+				"deps/cowboy/src/cowboy.erl"
+			],
+			[
+				"wf.erl",
+				"deps/n2o/src/wf.erl"
+			],
+			[
+				"bullet",
+				"deps/n2o/src/endpoints/cowboy/bullet_handler.erl"
+			],
+			[
+				"dynal",
+				"deps/n2o/src/endpoints/cowboy/n2o_dynalo.erl"
+			],
+			[
+				"cowboy_pro",
+				"deps/cowboy/src/cowboy_protocol.erl"
+			],
+			[
+				"cowboy_req.erl",
+				"deps/cowboy/src/cowboy_req.erl"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 345.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

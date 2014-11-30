@@ -18,10 +18,11 @@ defmodule Daemon.Supervisor do
 
 	def init(:ok) do
 		children = [
-			worker(Task,[Daemon.Reciever, :connect,[]]),
-			worker(Daemon.Dispatcher, [[name: :dispatcher]]),
+			worker(Repo, []),
 			worker(Daemon.SystemHandler, [[name: :system_handler]]),
 			worker(Daemon.NotifyHandler, [[name: :notify_handler]]),
+			worker(Daemon.Dispatcher, [[name: :dispatcher]]),
+			worker(Task,[Daemon.Reciever, :connect,[]]),
 		]
 		supervise(children, strategy: :one_for_one)
 	end
@@ -29,25 +30,25 @@ end
 
 defmodule Daemon.Reciever do
 	def connect() do
-		IO.puts "RECONNECT"
-		result = :gen_tcp.connect({127,0,0,1}, 5432, [:binary,active: false])
+		IO.puts "Connection"
+		result = :gen_tcp.connect({127,0,0,1}, 5679, [:binary, packet: 2, active: false])
 		case result do
 			{:ok, sock} -> recieve(sock)
 			_ -> connect()
 		end
 	end
 	def recieve(sock) do
-		data = sock |> :gen_tcp.recv(0,5000)
+		data = sock |> :gen_tcp.recv(0,1)
 		case data do
 			{:ok, msg} -> 
-				IO.puts "RECIEVED"
+				IO.puts "New Message Recieved"
 				GenServer.cast(:dispatcher, msg)
 				recieve(sock)
 			{:error, :timeout} -> 
-				IO.puts "TIMEOUT"
+				IO.puts "timeout"
 				recieve(sock)
 			{:error, _} ->
-				IO.puts "ERROR"
+				IO.puts "Socket Error"
 				connect()
 		end
 	end
@@ -105,10 +106,11 @@ defmodule Daemon.SystemHandler do
 	def handle_call(msg,_from,state) do
 		{:noreply, state}
 	end
-	def handle_cast(msg,state) do
+	def handle_info(msg,state) do
 		{:noreply, state}
 	end
-	def handle_info(msg,state) do
+	def handle_cast(msg,state) do
+		#DB Call
 		{:noreply, state}
 	end
 end
@@ -125,10 +127,11 @@ defmodule Daemon.NotifyHandler do
 	def handle_call(msg,_from,state) do
 		{:noreply, state}
 	end
-	def handle_cast(msg,state) do
+	def handle_info(msg,state) do
 		{:noreply, state}
 	end
-	def handle_info(msg,state) do
+	def handle_cast(msg,state) do
+		#Realplexor Cast
 		{:noreply, state}
 	end
 end
