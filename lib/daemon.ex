@@ -4,6 +4,14 @@ defmodule Daemon do
 		start(:normal, [])
 	end
 	def start(_type, _args) do
+		dispatch = :cowboy_router.compile([{:_,
+            [
+            {"/ws/[...]",      :bullet_handler, [{:handler, Bullet}]},
+            ] }])
+
+        {:ok, _} = :cowboy.start_http(:http, 100, [port: 8000], 
+            [env: [dispatch: dispatch]])
+
 		Daemon.Supervisor.start_link
 	end
 	
@@ -22,7 +30,7 @@ defmodule Daemon.Supervisor do
 			worker(Daemon.SystemHandler, [[name: :system_handler]]),
 			worker(Daemon.NotifyHandler, [[name: :notify_handler]]),
 			worker(Daemon.Dispatcher, [[name: :dispatcher]]),
-			worker(Task,[Daemon.Reciever, :connect,[]]),
+			#worker(Task,[Daemon.Reciever, :connect,[]]),
 		]
 		supervise(children, strategy: :one_for_one)
 	end

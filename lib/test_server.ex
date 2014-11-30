@@ -5,9 +5,9 @@ defmodule TestServer do
     end
     def test_accept(lsock) do
         {:ok, sock} = :gen_tcp.accept(lsock)
-        test_send(sock,100000)
-        #:ok = :gen_tcp.close(sock)
-        #test_accept(lsock)
+        test_send(sock,1)
+        :ok = :gen_tcp.close(sock)
+        test_accept(lsock)
     end
     def test_send(sock,0) do
     end

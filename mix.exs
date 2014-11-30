@@ -14,7 +14,7 @@ defmodule Daemon.Mixfile do
   def application do
     [
       mod: { Daemon, [] }, 
-      applications: [:logger, :jazz,:postgrex, :ecto]
+      applications: [:logger, :jazz,:postgrex, :ecto,:cowboy, :gproc]
     ]
   end
 
@@ -32,6 +32,8 @@ defmodule Daemon.Mixfile do
       {:jazz, github: "meh/jazz"},
       {:postgrex, ">= 0.0.0"},
       {:ecto, "~> 0.2.0"},
+      {:bullet, github: "extend/bullet"},
+      {:gproc, github: "uwiger/gproc"},
     ]
   end
 end

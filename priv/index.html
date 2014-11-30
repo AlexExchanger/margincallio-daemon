@@ -1,0 +1,22 @@
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="bullet.js"></script>
+<script >
+$(document).ready(function(){
+    bullet = $.bullet('ws://localhost:8000/ws/');
+    bullet.onopen = function(){
+        console.log('bullet: opened');
+    };
+    bullet.ondisconnect = function(){
+        console.log('bullet: disconnected');
+    };
+    bullet.onclose = function(){
+        console.log('bullet: closed');
+    };
+    bullet.onmessage = function(e){
+        console.log(e.data);
+    };
+    bullet.onheartbeat = function(){
+        bullet.send('ping');
+    }
+});
+</script>
