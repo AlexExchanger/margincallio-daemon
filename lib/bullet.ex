@@ -13,6 +13,7 @@ defmodule Bullet do
 	##
 	##
 	def info(data,req,state) do
+		IO.puts "Sending Message to Client"
 		resp = case data do
 			{:system,msg} -> ""
 			msg -> msg

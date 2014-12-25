@@ -6,11 +6,12 @@ defmodule Daemon do
 	def start(_type, _args) do
 		dispatch = :cowboy_router.compile([{:_,
             [
+        	{"/", :cowboy_static, {:file, "priv/index.html"}},
+        	{"/bullet.js", :cowboy_static, {:file, "priv/bullet.js"}},
             {"/ws/[...]",      :bullet_handler, [{:handler, Bullet}]},
             ] }])
 
-        {:ok, _} = :cowboy.start_http(:http, 100, [port: 8000], 
-            [env: [dispatch: dispatch]])
+       {:ok, _} = :cowboy.start_http(:http, 100, [port: 8000], [env: [dispatch: dispatch]])
 
 		Daemon.Supervisor.start_link
 	end
@@ -30,7 +31,7 @@ defmodule Daemon.Supervisor do
 			worker(Daemon.SystemHandler, [[name: :system_handler]]),
 			worker(Daemon.NotifyHandler, [[name: :notify_handler]]),
 			worker(Daemon.Dispatcher, [[name: :dispatcher]]),
-			#worker(Task,[Daemon.Reciever, :connect,[]]),
+			worker(Task,[Daemon.Reciever, :connect,[]]),
 		]
 		supervise(children, strategy: :one_for_one)
 	end
@@ -42,18 +43,21 @@ defmodule Daemon.Reciever do
 		result = :gen_tcp.connect({127,0,0,1}, 5679, [:binary, packet: 2, active: false])
 		case result do
 			{:ok, sock} -> recieve(sock)
-			_ -> connect()
+			_ -> 
+				:timer.sleep(5000)
+				connect()
 		end
 	end
 	def recieve(sock) do
 		data = sock |> :gen_tcp.recv(0,1)
 		case data do
 			{:ok, msg} -> 
-				IO.puts "New Message Recieved"
+				IO.puts "New Message Recieved: "
+				IO.puts msg
 				GenServer.cast(:dispatcher, msg)
 				recieve(sock)
 			{:error, :timeout} -> 
-				IO.puts "timeout"
+				#IO.puts "timeout"
 				recieve(sock)
 			{:error, _} ->
 				IO.puts "Socket Error"
@@ -88,18 +92,29 @@ defmodule Daemon.Dispatcher do
         route(msg)
 		{:noreply, state}
 	end
+
+
+
 	defp route(nil) do
+		IO.puts "JSON Decode Error"
 		#log error
 	end
-	defp route(%{type: "system"}=msg) do
-		GenServer.cast(:system_handler, msg)
+	defp route(msg_raw) do
+		msg = EngineMsg.raw_to_readable(msg_raw)
+		if msg == nil do
+			#log error
+		else
+			IO.inspect msg
+			cond do
+				Enum.member?(EngineMsg.system_types(),msg["type"]) ->
+					GenServer.cast(:system_handler, msg)
+				Enum.member?(EngineMsg.notify_types(),msg["type"]) -> 
+					GenServer.cast(:notify_handler, msg)
+			end
+		end
+		
 	end
-	defp route(%{type: "notify"}=msg) do
-		GenServer.cast(:notify_handler, msg)
-	end
-	defp route(_) do
-		#log error
-	end
+
 end
 
 defmodule Daemon.SystemHandler do
@@ -125,6 +140,7 @@ end
 
 defmodule Daemon.NotifyHandler do
 	use GenServer
+	use Jazz
 	def start_link(arg) do
 		GenServer.start_link(__MODULE__,:ok, arg)
 	end
@@ -138,8 +154,33 @@ defmodule Daemon.NotifyHandler do
 	def handle_info(msg,state) do
 		{:noreply, state}
 	end
-	def handle_cast(msg,state) do
-		#Realplexor Cast
+	def handle_cast(msg_atom,state) do
+		type = msg_atom["type"]
+		msg = %{msg_atom| "type" => to_string(msg_atom["type"])}
+		case type do
+			:NewTicker -> 
+				Bullet.pub({:general},JSON.encode!(msg))
+			:NewBalance -> 
+				user_id = msg["user_id"]
+				public_msg = Map.delete(msg,"user_id")
+				Bullet.pub({:user,user_id},JSON.encode!(public_msg))
+			:NewActiveBuyTop ->
+				Bullet.pub({:general},JSON.encode!(msg))
+			:NewActiveSellTop ->
+				Bullet.pub({:general},JSON.encode!(msg))
+			:NewAccountFee ->
+				user_id = msg["user_id"]
+				public_msg = Map.delete(msg,"user_id") |> Map.delete("func_call_id")
+				Bullet.pub({:user,user_id},JSON.encode!(public_msg))
+			:NewMarginLevel ->
+				user_id = msg["user_id"]
+				public_msg = Map.delete(msg,"user_id")
+				Bullet.pub({:user,user_id},JSON.encode!(public_msg))
+			:NewMarginCall ->
+				user_id = msg["user_id"]
+				public_msg = Map.delete(msg,"user_id")
+				Bullet.pub({:user,user_id},JSON.encode!(public_msg))
+		end
 		{:noreply, state}
 	end
 end
