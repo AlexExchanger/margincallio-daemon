@@ -29,7 +29,6 @@ defmodule EngineMsg do
 
 	def system_types do
 		[
-			:NewBalance, 
 			:NewPlaceLimit, 
 			:NewPlaceMarket, 
 			:NewPlaceInstant, 
@@ -51,6 +50,7 @@ defmodule EngineMsg do
 	def notify_types do
 
 		[
+			:NewBalance, 
 			:NewTicker, 
 			:NewActiveBuyTop, 
 			:NewActiveSellTop, 

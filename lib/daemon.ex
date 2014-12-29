@@ -40,7 +40,7 @@ end
 defmodule Daemon.Reciever do
 	def connect() do
 		IO.puts "Connection"
-		result = :gen_tcp.connect({127,0,0,1}, 5679, [:binary, packet: 2, active: false])
+		result = :gen_tcp.connect({184,168,134,144}, 1340, [:binary, packet: :line, active: false])
 		case result do
 			{:ok, sock} -> recieve(sock)
 			_ -> 
@@ -132,8 +132,19 @@ defmodule Daemon.SystemHandler do
 	def handle_info(msg,state) do
 		{:noreply, state}
 	end
-	def handle_cast(msg,state) do
-		#DB Call
+	def handle_cast(msg_atom,state) do
+		type = msg_atom["type"]
+		msg = %{msg_atom| "type" => to_string(msg_atom["type"])}
+		cond do
+			Enum.member?([:NewPlaceLimit,:NewPlaceMarket,:NewPlaceInstant, :NewCancelOrder,:NewAddSL,:NewAddTP,:NewRemoveSL,:NewRemoveTP,], type) ->
+				user_id = msg["user_id"]
+				public_msg = msg |> Map.delete("user_id") |> Map.delete("func_call_id") |> Map.delete("func_call_source")
+				Bullet.pub({:user,user_id},JSON.encode!(public_msg))
+			Enum.member?([:NewAddTS, :NewRemoveTS], type) ->
+				user_id = msg["user_id"]
+				public_msg = msg |> Map.delete("user_id") |> Map.delete("func_call_id") |> Map.delete("func_call_source")
+				Bullet.pub({:user,user_id},JSON.encode!(public_msg))
+		end
 		{:noreply, state}
 	end
 end

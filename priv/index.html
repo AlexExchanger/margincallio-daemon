@@ -2,7 +2,7 @@
 <script src="bullet.js"></script>
 <script >
 $(document).ready(function(){
-    bullet = $.bullet('ws://localhost:8000/ws/');
+    bullet = $.bullet('ws://'+window.location.host+'/ws/');
     bullet.onopen = function(){
         console.log('bullet: opened');
     };
