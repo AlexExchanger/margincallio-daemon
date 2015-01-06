@@ -7,4 +7,5 @@
   "jazz": {:git, "git://github.com/meh/jazz.git", "49f335492aca5516495199dd81dd18b845ebaa69", []},
   "poolboy": {:hex, :poolboy, "1.2.1"},
   "postgrex": {:hex, :postgrex, "0.6.0"},
+
   "ranch": {:git, "git://github.com/extend/ranch.git", "5df1f222f94e08abdcab7084f5e13027143cc222", [ref: "0.9.0"]}}
