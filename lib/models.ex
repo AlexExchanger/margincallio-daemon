@@ -47,3 +47,15 @@ defmodule Order do
         end
     end
 end
+
+defmodule DBLog do
+    use Ecto.Model
+    import Ecto.Query, only: [from: 2]
+     schema "user_log" do
+        field :userId, :integer
+        field :createdAt, :integer
+        field :action, :string
+        field :data, :string
+        field :ip, :string
+     end
+end

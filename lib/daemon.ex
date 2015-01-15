@@ -240,7 +240,7 @@ defmodule Daemon.SystemHandler do
 				seller_user_id = msg["seller_user_id"]
 				Bullet.pub({:user, seller_user_id}, JSON.encode!(seller_msg))
 
-				public_msg =%{
+				public_msg = %{
 					"type"  => msg["type"]<>"Public", # not forget to spec type newTradePublic
 					"trade_id"=> msg["trade_id"],
 					"amount"=> msg["amount"],
@@ -250,10 +250,64 @@ defmodule Daemon.SystemHandler do
 				}
 				Bullet.pub({:general},JSON.encode!(public_msg))
 			type == :NewMarketStatus ->
-
+				status = case msg["status"] do
+					0 -> "Closed"
+					1 -> "Opened"
+				end 
+				log = %DBLog{
+					action: "newMarketStatus",
+					data: status,
+					createdAt: msg["datetime"],
+				}
+				Repo.insert(log)
+				public_msg = %{
+					"type" => msg["type"],
+					"status" => status,
+					"datetime" => msg["datetime"],
+				}
+				Bullet.pub({:general}, JSON.encode!(public_msg))
 			type == :NewFixRestart ->
-
+				status = if msg["status_code"] == 29 do
+					"ErrorFixRestartFailed"
+				else
+					"Success"
+				end
+				log = %DBLog{
+					action: "fixRestart",
+					data: status,
+					createdAt: msg["datetime"],
+				}
+				Repo.insert(log)
+				public_msg = %{
+					"type" => msg["type"],
+					"status" => status,
+					"datetime" => msg["datetime"],
+				}
+				Bullet.pub({:general}, JSON.encode!(public_msg))
 			type == :NewSnapshotOperation -> 
+				status = case msg["status_code"] do
+					0 -> "Success"
+					37 -> "ErrorSnapshotBackupFailed"
+					38 -> "ErrorSnapshotRestoreFailed"
+				end
+				action = case msg["op_code"] do
+					0 -> "backupMaster"
+					1 -> "restoreMaster"
+					2 -> "restoreSlave"
+				end
+				log = %DBLog{
+					action: action,
+					data: status,
+					createdAt: msg["datetime"],
+				}
+				Repo.insert(log)
+				public_msg = %{
+					"type" => msg["type"],
+					"action" => action,
+					"status" => status,
+					"datetime" => msg["datetime"],
+				}
+				Bullet.pub({:general}, JSON.encode!(public_msg))
 		end
 		{:noreply, state}
 	end
