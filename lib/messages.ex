@@ -23,6 +23,10 @@ defmodule EngineMsg do
 			19 -> :NewExecSL 
 			20 -> :NewExecTP 
 			21 -> :NewExecTS 
+			22 -> :NewFixRestart
+			23 -> :NewOrderStatus
+			24 -> :NewMarketStatus
+			25 -> :NewSnapshotOperation
 			_ -> nil
 		end
 	end
@@ -43,7 +47,11 @@ defmodule EngineMsg do
 			:NewForcedLiquidation, 
 			:NewExecSL, 
 			:NewExecTP, 
-			:NewExecTS, 
+			:NewExecTS,
+			:NewFixRestart,
+			:NewOrderStatus,
+			:NewMarketStatus,
+			:NewSnapshotOperation ,
 		]
 	end
 
@@ -58,6 +66,24 @@ defmodule EngineMsg do
 			:NewMarginLevel,
 			:NewMarginCall,
 		]
+	end
+
+	def type_to_order_type(type) do
+		case type do 
+			:NewPlaceLimit -> "LIMIT"
+			:NewPlaceMarket -> "MARKET"
+			:NewPlaceInstant -> "INSTANT"
+			:NewForcedLiquidation -> "MARKET"
+			:NewAddSL -> "STOPLOSS"
+			:NewAddTP -> "TAKEPROFIT"
+			:NewAddTS -> "TRAILINGSTOP"
+			:NewRemoveSL -> "STOPLOSS"
+			:NewRemoveTP -> "TAKEPROFIT"
+			:NewRemoveTS -> "TRAILINGSTOP"
+			:NewExecSL -> "MARKET"
+			:NewExecTP -> "MARKET"
+			:NewExecTS -> "MARKET"
+		end
 	end
 
 	def raw_to_readable(msg_raw) do
@@ -166,6 +192,33 @@ defmodule EngineMsg do
 						"type" => type,
 						"user_id" => msg_raw["1"],
 						"datetime" => msg_raw["2"],
+					}
+				type == :NewFixRestart ->
+					%{
+						"type" => type,
+						"status_code" => msg_raw["1"],
+						"datetime" => msg_raw["2"],
+					}
+				type == :NewOrderStatus ->
+					%{
+						"type" => type,
+						"order_id" => msg_raw["1"],
+						"user_id" => msg_raw["2"],
+						"status" => msg_raw["3"],
+						"datetime" => msg_raw["4"],
+					}
+				type == :NewMarketStatus ->
+					%{
+						"type" => type,
+						"status" => msg_raw["1"],
+						"datetime" => msg_raw["2"],
+					}
+				type == :NewSnapshotOperation ->
+					%{
+						"type" => type,
+						"op_code" => msg_raw["1"],
+						"status_code" => msg_raw["2"],
+						"datetime" => msg_raw["3"],
 					}
 			end
 		end

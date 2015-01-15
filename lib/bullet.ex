@@ -35,8 +35,8 @@ defmodule Bullet do
 		        resp = case msg do
 		        	#==========================================================================
 		        	nil ->
-		        		JSON.encode!(%{"status" => "error", "reason" => "unparsable json"})
 		        		new_state = state
+		        		JSON.encode!(%{"status" => "error", "reason" => "unparsable json"})
 	        		#==========================================================================
 	        		%{"command"=> "subscribe", "channel" => channel, "user_id" => user_id} ->
 	        			if is_integer(user_id) != true do
@@ -53,6 +53,10 @@ defmodule Bullet do
 	        				end
         				end
     				#==========================================================================
+    				_ -> 
+    					new_state = state
+    					JSON.encode!(%{"status" => "error", "reason" => "incorrect request"})
+		        		
 		        end
 		end
 		{:reply,resp,req,new_state}
@@ -62,7 +66,7 @@ defmodule Bullet do
 	##
 	def terminate(req, state) do
 		if state.channel != nil do
-			unsub(state.channel)
+			unsub(state[:channel])
 		end
 		unsub({:general})
 		IO.puts "Terminate"
