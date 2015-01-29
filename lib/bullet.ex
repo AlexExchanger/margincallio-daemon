@@ -75,15 +75,17 @@ defmodule Bullet do
 	##
 	##
 	def channel_valid?(channel, user_id) do
-		str_id = to_string(user_id)
-		str_channel = to_string(channel)
-		bin_hash = :crypto.hmac(:sha256,Cfg.channel_key(), str_id)
-        string_hash = Base.encode64(bin_hash)
-        if string_hash == str_channel do
-        	true
-        else 
-        	false
-        end
+		# DEBUG ALWAYS RETURN TRUE
+		true
+		# str_id = to_string(user_id)
+		# str_channel = to_string(channel)
+		# bin_hash = :crypto.hmac(:sha256,Cfg.channel_key(), str_id)
+  #       string_hash = Base.encode64(bin_hash)
+  #       if string_hash == str_channel do
+  #       	true
+  #       else 
+  #       	false
+  #       end
 	end
 	##
 	##
