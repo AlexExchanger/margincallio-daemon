@@ -24,6 +24,7 @@ defmodule Bullet do
 	##
 	##
 	def stream(data,req,state) do
+		#IO.inspect data
 		resp = case data do
 			"ping" -> "ping"
 			json -> 

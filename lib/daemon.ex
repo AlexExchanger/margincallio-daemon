@@ -40,11 +40,14 @@ end
 defmodule Daemon.Reciever do
 	def connect() do
 		IO.puts "Connection"
-		# result = :gen_tcp.connect({184,168,134,144}, 1340, [:binary, packet: :line, active: false])
-		result = :gen_tcp.connect({127,0,0,1}, 5679, [:binary, packet: 2, active: false])
+		result = :gen_tcp.connect({184,168,134,144}, 1350, [:binary, packet: :line, active: false])
+		# result = :gen_tcp.connect({127,0,0,1}, 5679, [:binary, packet: 2, active: false])
 		case result do
-			{:ok, sock} -> recieve(sock)
+			{:ok, sock} -> 
+				IO.puts "Connection Success"
+				recieve(sock)
 			_ -> 
+				IO.puts "Connection Error"
 				:timer.sleep(5000)
 				connect()
 		end
