@@ -66,7 +66,7 @@ defmodule Bullet do
 	##
 	##
 	def terminate(req, state) do
-		if state.channel != nil do
+		if state[:channel] != nil do
 			unsub(state[:channel])
 		end
 		unsub({:general})
