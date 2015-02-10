@@ -92,7 +92,11 @@ defmodule Bullet do
 	##
 	##
 	def sub(channel) do
-		:gproc.reg({:p,:l,channel})
+		try do
+			:gproc.reg({:p,:l,channel})
+		rescue
+			_ -> nil
+		end
 	end
 	def unsub(channel) do
 		:gproc.unreg({:p,:l,channel})
