@@ -1,3 +1,5 @@
+import ExPrintf
+import Utils
 defmodule Daemon do
 	use Application
 	def start do
@@ -160,19 +162,25 @@ defmodule Daemon.SystemHandler do
 					side: msg["side"]!=0, #hack to make boolean
 				}
 				try do
-	 Repo.insert(order) 
- rescue 
-	 _ -> Repo.update(order) 
-end
+					Repo.insert(order) 
+				rescue 
+					_ -> Repo.update(order) 
+				end
+				offset_public = if msg["offset"] === nil do
+					nil
+				else
+					sprintf("%.6f",[msg["offset"]])
+				end
 				public_msg = %{
 					"type" => msg["type"],
-					"order_id" => msg["order_id"],
-					"rate" => msg["rate"],
-					"amount" => msg["amount"],
-					"side" => msg["side"],
-					"datetime" => msg["datetime"],
+					"id" => msg["order_id"],
+					"rate" => sprintf("%.6f",[msg["rate"]]),
+					"amount" => sprintf("%.6f",[msg["amount"]]),
+					"side" => msg["side"]!=0, #hack to make boolean
+					"order_type" => order.type,
+					"timestamp"=> Utils.datetime_to_timestamp(msg["datetime"]),
 					"status" => "accepted",
-					"offset" => msg["offset"],
+					"offset" => offset_public,
 				}
 				Bullet.pub({:user, msg["user_id"]}, JSON.encode!(public_msg))
 
@@ -183,26 +191,37 @@ end
 				else 
 					"filled"
 				end
-				new_order = %Order{order| status: status}
-				Repo.update(new_order)
+				new_order = %Order{order| 
+					status: status,
+					updatedAt: msg["datetime"],
+				}
+				try do
+					Repo.update(new_order)
+				rescue
+					_ -> nil
+				end
 				user_msg = %{
 					"type" => msg["type"],
-					"order_id" => msg["order_id"],
+					"id" => msg["order_id"],
 					"status" => status,
-					"datetime" => msg["datetime"],
+					"timestamp"=> Utils.datetime_to_timestamp(msg["datetime"]),
 				}
 				Bullet.pub({:user, msg["user_id"]}, JSON.encode!(user_msg))
 
 
 			Enum.member?([:NewRemoveSL, :NewRemoveTP, :NewRemoveTS, :NewCancelOrder], type) ->
 				order = Order.get_by_id(msg["order_id"])
-				order_cancelled = %Order{order| status: "cancelled"}
-				Repo.update(order_cancelled)
+				order_cancelled = %Order{order| status: "cancelled",updatedAt: msg["datetime"],}
+				try do
+					Repo.update(order_cancelled)
+				rescue
+					_ -> nil
+				end
 				public_msg = %{
 					"type" => msg["type"],
-					"order_id" => msg["order_id"],
+					"id" => msg["order_id"],
 					"status" => "cancelled",
-					"datetime" => msg["datetime"],
+					"timestamp"=> Utils.datetime_to_timestamp(msg["datetime"]),
 				}
 				Bullet.pub({:user, msg["user_id"]}, JSON.encode!(public_msg))
 
@@ -227,37 +246,37 @@ end
 				end
 				buyer_msg =%{
 					"type"  => msg["type"],
-					"trade_id"=> msg["trade_id"],
-					"amount"=> msg["amount"],
-					"rate"=> msg["rate"],
+					"id"=> msg["trade_id"],
+					"amount"=> sprintf("%.6f",[msg["amount"]]),
+					"rate"=> sprintf("%.6f",[msg["rate"]]),
 					"order_id"=> msg["buy_order_id"],
-					"datetime"=> msg["datetime"],
-					"fee"=> msg["buyer_fee"],
-					"side"=> msg["side"],
+					"timestamp"=> Utils.datetime_to_timestamp(msg["datetime"]),
+					"fee"=> sprintf("%.3f",[msg["buyer_fee"]]),
+					"side"=> msg["side"]!=0,
 				}
 				buyer_user_id = msg["buyer_user_id"]
 				Bullet.pub({:user, buyer_user_id}, JSON.encode!(buyer_msg))
 
 				seller_msg =%{
 					"type"  => msg["type"],
-					"trade_id"=> msg["trade_id"],
-					"amount"=> msg["amount"],
-					"rate"=> msg["rate"],
+					"id"=> msg["trade_id"],
+					"amount"=> sprintf("%.6f",[msg["amount"]]),
+					"rate"=> sprintf("%.6f",[msg["rate"]]),
 					"order_id"=> msg["sell_order_id"],
-					"datetime"=> msg["datetime"],
-					"fee"=> msg["seller_fee"],
-					"side"=> msg["side"],
+					"timestamp"=> Utils.datetime_to_timestamp(msg["datetime"]),
+					"fee"=> sprintf("%.3f",[msg["seller_fee"]]),
+					"side"=> msg["side"]!=0,
 				}
 				seller_user_id = msg["seller_user_id"]
 				Bullet.pub({:user, seller_user_id}, JSON.encode!(seller_msg))
 
 				public_msg = %{
 					"type"  => msg["type"]<>"Public", # not forget to spec type newTradePublic
-					"trade_id"=> msg["trade_id"],
-					"amount"=> msg["amount"],
-					"rate"=> msg["rate"],
-					"datetime"=> msg["datetime"],
-					"side"=> msg["side"],
+					"id"=> msg["trade_id"],
+					"amount"=> sprintf("%.6f",[msg["amount"]]),
+					"rate"=> sprintf("%.6f",[msg["rate"]]),
+					"timestamp"=> Utils.datetime_to_timestamp(msg["datetime"]),
+					"side"=> msg["side"]!=0,
 				}
 				Bullet.pub({:general},JSON.encode!(public_msg))
 			type == :NewMarketStatus ->
@@ -278,7 +297,7 @@ end
 				public_msg = %{
 					"type" => msg["type"],
 					"status" => status,
-					"datetime" => msg["datetime"],
+					"timestamp"=> Utils.datetime_to_timestamp(msg["datetime"]),
 				}
 				Bullet.pub({:general}, JSON.encode!(public_msg))
 			type == :NewFixRestart ->
@@ -300,7 +319,7 @@ end
 				public_msg = %{
 					"type" => msg["type"],
 					"status" => status,
-					"datetime" => msg["datetime"],
+					"timestamp"=> Utils.datetime_to_timestamp(msg["datetime"]),
 				}
 				Bullet.pub({:general}, JSON.encode!(public_msg))
 			type == :NewSnapshotOperation -> 
@@ -328,7 +347,7 @@ end
 					"type" => msg["type"],
 					"action" => action,
 					"status" => status,
-					"datetime" => msg["datetime"],
+					"timestamp"=> Utils.datetime_to_timestamp(msg["datetime"]),
 				}
 				Bullet.pub({:general}, JSON.encode!(public_msg))
 		end
@@ -357,26 +376,84 @@ defmodule Daemon.NotifyHandler do
 		msg = %{msg_atom| "type" => to_string(msg_atom["type"])}
 		case type do
 			:NewTicker -> 
-				Bullet.pub({:general},JSON.encode!(msg))
+				public_msg = %{
+					"type" => msg["type"],
+					"bid_price" => sprintf("%.4f",[msg["bid_price"]]),
+					"ask_price" => sprintf("%.4f",[msg["ask_price"]]),
+					"timestamp"=> Utils.datetime_to_timestamp(msg["datetime"]),
+				}
+				Bullet.pub({:general},JSON.encode!(public_msg))
 			:NewBalance -> 
 				user_id = msg["user_id"]
-				public_msg = Map.delete(msg,"user_id")
+				public_msg = %{
+					"type" => msg["type"],
+					"trade" => %{
+									"first" => sprintf("%.8f",[msg["available_funds_1"]+msg["blocked_funds_1"]]),
+									"second" => sprintf("%.8f",[msg["available_funds_2"]+msg["blocked_funds_2"]]),
+								},
+					"trade_available" => %{
+									"first" => sprintf("%.8f",[msg["available_funds_1"]]),
+									"second" => sprintf("%.8f",[msg["available_funds_2"]]),
+								},
+					"timestamp"=> Utils.datetime_to_timestamp(msg["datetime"]),
+				}
 				Bullet.pub({:user,user_id},JSON.encode!(public_msg))
 			:NewActiveBuyTop ->
-				Bullet.pub({:general},JSON.encode!(msg))
+				buy_levels_raw = msg["buy_levels"]
+				buy_levels_maps = Enum.map(buy_levels_raw, 
+						fn([amount, rate]) -> 
+							%{
+								"amount"=> sprintf("%.4f",[amount]),
+								"rate"=> sprintf("%.4f",[rate]),
+								"sum" => sprintf("%.2f",[amount*rate]),
+							}
+						end
+					)
+				public_msg = %{
+					"type" => msg["type"],
+					"bid" => buy_levels_maps,
+					"timestamp"=> Utils.datetime_to_timestamp(msg["datetime"]),
+				}
+				Bullet.pub({:general},JSON.encode!(public_msg))
 			:NewActiveSellTop ->
-				Bullet.pub({:general},JSON.encode!(msg))
+				sell_levels_raw = msg["sell_levels"]
+				sell_levels_maps = Enum.map(sell_levels_raw, 
+						fn([amount, rate]) -> 
+							%{
+								"amount"=> sprintf("%.4f",[amount]),
+								"rate"=> sprintf("%.4f",[rate]),
+								"sum" => sprintf("%.2f",[amount*rate]),
+							}
+						end
+					)
+				public_msg = %{
+					"type" => msg["type"],
+					"ask" => sell_levels_maps,
+					"timestamp"=> Utils.datetime_to_timestamp(msg["datetime"]),
+				}
+				Bullet.pub({:general},JSON.encode!(public_msg))
 			:NewAccountFee ->
 				user_id = msg["user_id"]
-				public_msg = Map.delete(msg,"user_id") |> Map.delete("func_call_id")
+				public_msg = %{
+					"type" => msg["type"],
+					"fee" => sprintf("%.4f",[msg["fee"]]),
+					"timestamp"=> Utils.datetime_to_timestamp(msg["datetime"]),
+				}
 				Bullet.pub({:user,user_id},JSON.encode!(public_msg))
 			:NewMarginLevel ->
 				user_id = msg["user_id"]
-				public_msg = Map.delete(msg,"user_id")
+				public_msg = %{
+					"type" => msg["type"],
+					"margin_level" => sprintf("%.4f",[msg["margin_level"]]),
+					"timestamp"=> Utils.datetime_to_timestamp(msg["datetime"]),
+				}
 				Bullet.pub({:user,user_id},JSON.encode!(public_msg))
 			:NewMarginCall ->
 				user_id = msg["user_id"]
-				public_msg = Map.delete(msg,"user_id")
+				public_msg = %{
+					"type" => msg["type"],
+					"timestamp"=> Utils.datetime_to_timestamp(msg["datetime"]),
+				}
 				Bullet.pub({:user,user_id},JSON.encode!(public_msg))
 		end
 		{:noreply, state}

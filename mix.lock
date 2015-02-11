@@ -3,9 +3,9 @@
   "cowlib": {:git, "git://github.com/extend/cowlib.git", "63298e8e160031a70efff86a1acde7e7db1fcda6", [ref: "0.4.0"]},
   "decimal": {:hex, :decimal, "0.2.5"},
   "ecto": {:hex, :ecto, "0.2.5"},
+  "exprintf": {:git, "git://github.com/parroty/exprintf.git", "5e71122ca40b0a9e0c8d4f57d64a8004b9d007ef", []},
   "gproc": {:git, "git://github.com/uwiger/gproc.git", "46238dea573c3910c2a1ec9e413925b2cc471494", []},
   "jazz": {:git, "git://github.com/meh/jazz.git", "49f335492aca5516495199dd81dd18b845ebaa69", []},
   "poolboy": {:hex, :poolboy, "1.2.1"},
   "postgrex": {:hex, :postgrex, "0.6.0"},
-
   "ranch": {:git, "git://github.com/extend/ranch.git", "5df1f222f94e08abdcab7084f5e13027143cc222", [ref: "0.9.0"]}}

@@ -34,6 +34,7 @@ defmodule Daemon.Mixfile do
       {:ecto, "~> 0.2.0"},
       {:bullet, github: "extend/bullet"},
       {:gproc, github: "uwiger/gproc"},
+      {:exprintf, github: "parroty/exprintf"},
     ]
   end
 end
