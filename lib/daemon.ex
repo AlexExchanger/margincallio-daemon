@@ -159,7 +159,11 @@ defmodule Daemon.SystemHandler do
 					type: EngineMsg.type_to_order_type(type),
 					side: msg["side"]!=0, #hack to make boolean
 				}
-				Repo.insert(order)
+				try do
+	 Repo.insert(order) 
+ rescue 
+	 _ -> Repo.update(order) 
+end
 				public_msg = %{
 					"type" => msg["type"],
 					"order_id" => msg["order_id"],
@@ -216,7 +220,11 @@ defmodule Daemon.SystemHandler do
 					sellerFee: Decimal.new(msg["seller_fee"]),
 					side: msg["side"]!=0, #hack to make boolean
 				}
-				Repo.insert(deal)
+				try do
+	 				Repo.insert(deal) 
+ 				rescue 
+	 				_ -> Repo.update(deal) 
+				end
 				buyer_msg =%{
 					"type"  => msg["type"],
 					"trade_id"=> msg["trade_id"],
@@ -262,7 +270,11 @@ defmodule Daemon.SystemHandler do
 					data: status,
 					createdAt: msg["datetime"],
 				}
-				Repo.insert(log)
+				try do
+	 				Repo.insert(log) 
+ 				rescue 
+					_ -> Repo.update(log) 
+				end
 				public_msg = %{
 					"type" => msg["type"],
 					"status" => status,
@@ -280,7 +292,11 @@ defmodule Daemon.SystemHandler do
 					data: status,
 					createdAt: msg["datetime"],
 				}
-				Repo.insert(log)
+				try do
+					 Repo.insert(log) 
+				rescue 
+					 _ -> Repo.update(log) 
+				end
 				public_msg = %{
 					"type" => msg["type"],
 					"status" => status,
@@ -303,7 +319,11 @@ defmodule Daemon.SystemHandler do
 					data: status,
 					createdAt: msg["datetime"],
 				}
-				Repo.insert(log)
+				try do
+					Repo.insert(log) 
+				rescue 
+					_ -> Repo.update(log) 
+				end
 				public_msg = %{
 					"type" => msg["type"],
 					"action" => action,
