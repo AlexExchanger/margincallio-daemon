@@ -440,10 +440,11 @@ defmodule Daemon.NotifyHandler do
 					"timestamp"=> Utils.datetime_to_timestamp(msg["datetime"]),
 				}
 				Bullet.pub({:user,user_id},JSON.encode!(public_msg))
-			:NewMarginLevel ->
+			:NewMarginInfo ->
 				user_id = msg["user_id"]
 				public_msg = %{
 					"type" => msg["type"],
+					"equity" => sprintf("%.4f",[msg["equity"]])
 					"margin_level" => sprintf("%.4f",[msg["margin_level"]]),
 					"timestamp"=> Utils.datetime_to_timestamp(msg["datetime"]),
 				}

@@ -180,12 +180,13 @@ defmodule EngineMsg do
 						"fee" => msg_raw["3"],
 						"datetime" => msg_raw["4"],
 					}
-				type == :NewMarginLevel ->
+				type == :NewMarginInfo ->
 					%{
 						"type" => type,
 						"user_id" => msg_raw["1"],
-						"margin_level" => msg_raw["2"],
-						"datetime" => msg_raw["3"],
+						"equity" => msg_raw["2"],
+						"margin_level" => msg_raw["3"],
+						"datetime" => msg_raw["4"],
 					}
 				type == :NewMarginCall ->
 					%{
