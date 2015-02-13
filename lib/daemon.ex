@@ -444,7 +444,7 @@ defmodule Daemon.NotifyHandler do
 				user_id = msg["user_id"]
 				public_msg = %{
 					"type" => msg["type"],
-					"equity" => sprintf("%.4f",[msg["equity"]])
+					"equity" => sprintf("%.4f",[msg["equity"]]),
 					"margin_level" => sprintf("%.4f",[msg["margin_level"]]),
 					"timestamp"=> Utils.datetime_to_timestamp(msg["datetime"]),
 				}
