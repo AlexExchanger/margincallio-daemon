@@ -46,7 +46,7 @@ defmodule Bullet do
 	        			else
 	        				if channel_valid?(channel, user_id) do
 	        					sub({:user, user_id})
-	        					new_state = %{state| channel: {:user,user_id}}
+	        					new_state = %{channel: {:user,user_id}}
 	        					JSON.encode!(%{"status" => "success"})
 	        				else
 	        					new_state = state
