@@ -17,7 +17,7 @@ defmodule EngineMsg do
 			13 -> :NewRemoveTP 
 			14 -> :NewRemoveTS 
 			15 -> :NewAccountFee 
-			16 -> :NewMarginLevel 
+			16 -> :NewMarginInfo
 			17 -> :NewMarginCall 
 			18 -> :NewForcedLiquidation 
 			19 -> :NewExecSL 
