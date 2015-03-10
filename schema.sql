@@ -28,6 +28,7 @@ CREATE TABLE "public"."order" (
 "id" int8 NOT NULL,
 "userId" int8 NOT NULL,
 "size" numeric(20,15) NOT NULL,
+"actualSize" numeric(20,15) NOT NULL,
 "price" numeric(20,15),
 "createdAt" int8 NOT NULL,
 "updatedAt" int8,

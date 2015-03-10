@@ -91,10 +91,11 @@ defmodule Messages do
 			order_id: msg["5"],
 			user_id: msg["6"],
 			side: msg["7"] == 1,
-			amount: msg["8"],
-			rate: msg["9"],
-			offset: msg["10"],
-			datetime: msg["11"],
+			original_amount: msg["8"],
+			actual_amount: msg["9"],
+			rate: msg["10"],
+			offset: if msg["11"] == 0 do nil else msg["11"] end,
+			datetime: msg["12"],
 		}
 	end
 
@@ -104,7 +105,7 @@ defmodule Messages do
 			order_id: msg["2"],
 			user_id: msg["3"],
 			actual_amount: msg["4"],
-			status: if msg["5"] == 0 do "PartiallyFilled" else "Filled" end,
+			status: if msg["5"] == 0 do "partiallyFilled" else "filled" end,
 			datetime: msg["6"],
 		}
 	end
@@ -202,7 +203,8 @@ defmodule Messages do
 			currency: msg.currency,
 			order_id: msg.order_id,
 			side: msg.side,
-			amount: stringify(msg.amount, 4),
+			original_amount: stringify(msg.original_amount,4),
+			actual_amount: stringify(msg.actual_amount,4),
 			rate: stringify(msg.rate, 4),
 			offset: stringify(msg.offset, 4),
 			timestamp: timestampify(msg.datetime),
@@ -289,9 +291,18 @@ defmodule Messages do
 		Bullet.pub({:general, msg.currency}, publify(msg))
 	end
 	def handle (%{type: :NewOrder} = msg) do
+		cond do
+			Enum.member?(["PlaceLimit","PlaceMarket","AddSL","AddTP","AddTS","ForcedLiquidation"], msg.order_event) ->
+				Order.create(msg) 
+			Enum.member?(["Cancel"], msg.order_event) ->
+				Order.cancel(msg)
+			Enum.member?(["ExecSL", "ExecTP", "ExecTS"], msg.order_event) ->
+				Order.exec(msg)
+		end
 		Bullet.pub({:user, msg.user_id, msg.currency}, publify(msg))
 	end
 	def handle (%{type: :NewOrderMatch} = msg) do
+		Order.update(msg)
 		Bullet.pub({:user, msg.user_id, msg.currency}, publify(msg))
 	end
 	def handle (%{type: :NewTrade} = msg) do
@@ -305,5 +316,16 @@ defmodule Messages do
 	end
 
 	def handle(nil) do 
+	end
+
+	def order_type(order_event) do
+		case order_event do
+			"PlaceLimit" -> "LIMIT"
+			"PlaceMarket" -> "MARKET"
+			"AddSL" -> "STOPLOSS"
+			"AddTP" -> "TAKEPROFIT"
+			"AddTS" -> "TRAILINGSTOP"
+			"ForcedLiquidation" -> "MARKET"
+		end
 	end
 end

@@ -29,7 +29,7 @@ defmodule Daemon.Supervisor do
 		children = [
 			worker(Repo, []),
 			worker(Daemon.NotifyHandler, [[name: :notify_handler]]),
-			worker(Task,[Daemon.Reciever, :connect,[]]),
+			#worker(Task,[Daemon.Reciever, :connect,[]]),
 		]
 		supervise(children, strategy: :one_for_one)
 	end
@@ -76,6 +76,7 @@ end
 defmodule Daemon.NotifyHandler do
 	use GenServer
 	use Jazz
+
 	def start_link(arg) do
 		GenServer.start_link(__MODULE__,:ok, arg)
 	end

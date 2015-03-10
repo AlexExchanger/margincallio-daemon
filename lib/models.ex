@@ -57,6 +57,7 @@ defmodule Order do
     schema "order" do
         field :userId, :integer
         field :size,    :decimal
+        field :actualSize, :decimal
         field :price, :decimal
         field :createdAt, :integer
         field :updatedAt, :integer
@@ -66,5 +67,83 @@ defmodule Order do
         field :offset, :decimal
         field :currency, :string
     end
+    @doc """
+        Call when NewOrder recieved and order_event is 
+        "PlaceLimit" or "PlaceMarket" or "AddSL" or "AddTP" or "AddTS" or "ForcedLiquidation"
+    """
+    def create(msg) do
+        order = %Order{
+            id: msg.order_id,
+            userId: msg.user_id,
+            size: decimalify(msg.original_amount),
+            actualSize: decimalify(msg.actual_amount),
+            price: decimalify(msg.rate),
+            createdAt: msg.datetime,
+            updatedAt: msg.datetime,
+            status: "accepted",
+            type: Messages.order_type(msg.order_event),
+            side: msg.side,
+            offset: decimalify(msg.offset),
+            currency: msg.currency
+        }
+        try do
+            Repo.insert(order) 
+        rescue
+            _ -> Repo.update(order) 
+        end
+    end
 
+    @doc """
+        Call when NewOrder recieved and order_event is "Cancel"
+    """
+    def cancel(msg) do
+        check = Repo.all(from o in Order, where: o.id == ^msg.order_id)
+        case check do
+            [] -> nil
+            [order] -> 
+                order_new = %Order{order| 
+                    actualSize: decimalify(msg.actual_amount),
+                    status: "cancelled",
+                    updatedAt: msg.datetime,
+                }
+                Repo.update(order_new) 
+        end
+        
+    end
+
+    @doc """
+        Call when NewOrder recieved and order_event is
+        "ExecSL" or "ExecTP" or "ExecTS"
+    """
+    def exec(msg) do
+        check = Repo.all(from o in Order, where: o.id == ^msg.order_id)
+        case check do
+            [] -> nil
+            [order] -> 
+                order_new = %Order{order| 
+                    actualSize: decimalify(msg.actual_amount),
+                    status: "accepted",
+                    updatedAt: msg.datetime,
+                }
+                Repo.update(order_new) 
+        end
+    end
+
+    @doc """
+        Call when NewOrderMatch recieved
+    """
+    def update(msg) do
+        check = Repo.all(from o in Order, where: o.id == ^msg.order_id)
+        case check do
+            [] -> nil
+            [order] -> 
+                order_new = %Order{order| 
+                    actualSize: decimalify(msg.actual_amount),
+                    status: msg.status,
+                    updatedAt: msg.datetime,
+                }
+                Repo.update(order_new) 
+        end
+        
+    end
 end
