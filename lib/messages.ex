@@ -281,7 +281,7 @@ defmodule Messages do
 	end
 	def handle (%{type: :NewBalance} = msg) do
 		case msg.currency do
-			"eur" -> Bullet.pub({:user,msg.user_id}, publify(msg))
+			"EUR" -> Bullet.pub({:user,msg.user_id}, publify(msg))
 			_ -> Bullet.pub({:user,msg.user_id,msg.currency}, publify(msg))
 		end
 	end
