@@ -105,7 +105,11 @@ defmodule Messages do
 			order_id: msg["2"],
 			user_id: msg["3"],
 			actual_amount: msg["4"],
-			status: if msg["5"] == 0 do "partiallyFilled" else "filled" end,
+			status: case msg["5"] do 
+				0 -> "partiallyFilled" 
+				1 -> "filled" 
+				2 -> "accepted"
+			end,
 			datetime: msg["6"],
 		}
 	end
