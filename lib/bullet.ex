@@ -1,17 +1,20 @@
 defmodule Bullet do 
+	require Lager
 	use Jazz
 	##
 	##
 	##
 	def init(_transport, req, _opts, _active) do
-		IO.puts "Init or reInit Bullet Connection"
+		peer = :cowboy_req.peer(req)
+		Lager.info "Init or reInit Bullet Connection #{inspect peer}"
 		{:ok, req, %{}}
 	end
 	##
 	##
 	##
 	def info(data,req,state) do
-		IO.puts "Sending Message to Client"
+		peer = :cowboy_req.peer(req)
+		Lager.info "Sending Message to Client #{inspect peer}"
 		resp = case data do
 			{:system,_} -> ""
 			msg -> msg
@@ -68,9 +71,10 @@ defmodule Bullet do
 	##
 	##
 	##
-	def terminate(_req, state) do
+	def terminate(req, state) do
 		unsub_all(state)
-		IO.puts "Terminate"
+		peer = :cowboy_req.peer(req)
+		Lager.info "Terminate #{inspect peer}"
 	end
 	##
 	##
@@ -119,7 +123,7 @@ defmodule Bullet do
 	end
 
 	def unsub_all(state) do
-		IO.inspect [self,state]
+		#Lager.info inspect [self,state]
 		if state[:general] != nil do
 			{:general, currency} = state[:general]
 			unsub({:general, currency})
