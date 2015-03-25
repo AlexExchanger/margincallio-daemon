@@ -5,7 +5,7 @@ defmodule Bullet do
 	##
 	##
 	def init(_transport, req, _opts, _active) do
-		peer = :cowboy_req.peer(req)
+		{peer,_} = :cowboy_req.peer(req)
 		Lager.info "Init or reInit Bullet Connection #{inspect peer}"
 		{:ok, req, %{}}
 	end
@@ -13,7 +13,7 @@ defmodule Bullet do
 	##
 	##
 	def info(data,req,state) do
-		peer = :cowboy_req.peer(req)
+		{peer,_} = :cowboy_req.peer(req)
 		Lager.info "Sending Message to Client #{inspect peer}"
 		resp = case data do
 			{:system,_} -> ""
@@ -73,7 +73,7 @@ defmodule Bullet do
 	##
 	def terminate(req, state) do
 		unsub_all(state)
-		peer = :cowboy_req.peer(req)
+		{peer,_} = :cowboy_req.peer(req)
 		Lager.info "Terminate #{inspect peer}"
 	end
 	##
