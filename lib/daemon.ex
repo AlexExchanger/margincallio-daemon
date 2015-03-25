@@ -55,6 +55,7 @@ defmodule Daemon.Reciever do
 		data = sock |> :gen_tcp.recv(0,1)
 		case data do
 			{:ok, msg} -> 
+				Lager.info("Message recieved: "<>inspect(msg))
 				GenServer.cast(:notify_handler, msg)
 				recieve(sock)
 			{:error, :timeout} -> 
@@ -96,8 +97,6 @@ defmodule Daemon.NotifyHandler do
         rescue
             _e in JSON.SyntaxError -> nil
         end
-        Lager.info("Message recieved: "<>inspect(msg))
-
         parsed_msg = Utils.profily("parsing", fn -> Messages.parse(msg) end) #profilated
         #parsed_msg = Messages.parse(msg) # initial one
         Utils.profily("handling", fn -> Messages.handle(parsed_msg) end) #profilated
