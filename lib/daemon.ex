@@ -92,6 +92,8 @@ defmodule Daemon.NotifyHandler do
 		{:noreply, state}
 	end
 	def handle_cast(json_msg,state) do
+		{:message_queue_len, length} = :erlang.process_info self(), :message_queue_len
+		Lager.info "MESSAGE QUEUE LEN: #{length}"
 		msg = try do
             JSON.decode!(json_msg)
         rescue
