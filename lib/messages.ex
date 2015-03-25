@@ -279,47 +279,76 @@ defmodule Messages do
 			sum: stringify(amount*rate, 2),
 		}
 	end
+
+
+
 	def handle (%{type: :NewBalance} = msg) do
 		case msg.currency do
-			"EUR" -> Bullet.pub({:user,msg.user_id}, publify(msg))
-			_ -> Bullet.pub({:user,msg.user_id,msg.currency}, publify(msg))
+			"EUR" -> 
+				# Bullet.pub({:user,msg.user_id}, publify(msg))
+				profily("publification of #{msg.type}",fn -> Bullet.pub({:user,msg.user_id}, publify(msg)) end)
+			_ -> 
+				profily("publification of #{msg.type}",fn -> Bullet.pub({:user,msg.user_id}, publify(msg)) end)
+				# Bullet.pub({:user,msg.user_id,msg.currency}, publify(msg))
 		end
 	end
 	def handle (%{type: :NewMarginInfo} = msg) do
-		Bullet.pub({:user, msg.user_id}, publify(msg))
+		profily("publification of #{msg.type}",fn -> Bullet.pub({:user, msg.user_id}, publify(msg)) end)
+		# Bullet.pub({:user, msg.user_id}, publify(msg))
 	end
 	def handle (%{type: :NewMarginCall} = msg) do
-		Bullet.pub({:user, msg.user_id}, publify(msg))
+		profily("publification of #{msg.type}",fn -> Bullet.pub({:user, msg.user_id}, publify(msg)) end)
+		# Bullet.pub({:user, msg.user_id}, publify(msg))
 	end
 	def handle (%{type: :NewTicker} = msg) do
-		Bullet.pub({:general, msg.currency}, publify(msg))
+		profily("publification of #{msg.type}",fn -> Bullet.pub({:general, msg.currency}, publify(msg)) end)
+		# Bullet.pub({:general, msg.currency}, publify(msg))
 	end
 	def handle (%{type: :NewOrderBookTop} = msg) do
-		Bullet.pub({:general, msg.currency}, publify(msg))
+		profily("publification of #{msg.type}",fn -> Bullet.pub({:general, msg.currency}, publify(msg)) end)
+		# Bullet.pub({:general, msg.currency}, publify(msg))
 	end
 	def handle (%{type: :NewOrder} = msg) do
-		cond do
+		profily("DB interaction", fn -> 
+			cond do
 			Enum.member?(["PlaceLimit","PlaceMarket","AddSL","AddTP","AddTS","ForcedLiquidation"], msg.order_event) ->
 				Order.create(msg) 
 			Enum.member?(["Cancel"], msg.order_event) ->
 				Order.cancel(msg)
 			Enum.member?(["ExecSL", "ExecTP", "ExecTS"], msg.order_event) ->
 				Order.exec(msg)
-		end
-		Bullet.pub({:user, msg.user_id, msg.currency}, publify(msg))
+			end
+		end)
+		# cond do
+		# 	Enum.member?(["PlaceLimit","PlaceMarket","AddSL","AddTP","AddTS","ForcedLiquidation"], msg.order_event) ->
+		# 		Order.create(msg) 
+		# 	Enum.member?(["Cancel"], msg.order_event) ->
+		# 		Order.cancel(msg)
+		# 	Enum.member?(["ExecSL", "ExecTP", "ExecTS"], msg.order_event) ->
+		# 		Order.exec(msg)
+		# end
+		profily("publification of #{msg.type}",fn -> Bullet.pub({:user, msg.user_id, msg.currency}, publify(msg)) end)
+		# Bullet.pub({:user, msg.user_id, msg.currency}, publify(msg))
 	end
 	def handle (%{type: :NewOrderMatch} = msg) do
-		Order.update(msg)
-		Bullet.pub({:user, msg.user_id, msg.currency}, publify(msg))
+		profily("DB interaction", fn -> Order.update(msg) end)
+		# Order.update(msg)
+		profily("publification of #{msg.type}",fn -> Bullet.pub({:user, msg.user_id, msg.currency}, publify(msg)) end)
+		# Bullet.pub({:user, msg.user_id, msg.currency}, publify(msg))
 	end
 	def handle (%{type: :NewTrade} = msg) do
-		Deal.create(msg)
-		Bullet.pub({:general, msg.currency}, publify(msg))
-		Bullet.pub({:user, msg.buyer_user_id, msg.currency}, publify_buyer(msg))
-		Bullet.pub({:user, msg.seller_user_id, msg.currency}, publify_seller(msg))
+		profily("DB interaction", fn -> Deal.create(msg) end)
+		# Deal.create(msg)
+		profily("publification of #{msg.type}",fn -> Bullet.pub({:general, msg.currency}, publify(msg)) end)
+		# Bullet.pub({:general, msg.currency}, publify(msg))
+		profily("publification of #{msg.type}",fn -> Bullet.pub({:user, msg.buyer_user_id, msg.currency}, publify_buyer(msg)) end)
+		# Bullet.pub({:user, msg.buyer_user_id, msg.currency}, publify_buyer(msg))
+		profily("publification of #{msg.type}",fn -> Bullet.pub({:user, msg.seller_user_id, msg.currency}, publify_seller(msg)) end)
+		# Bullet.pub({:user, msg.seller_user_id, msg.currency}, publify_seller(msg))
 	end
 	def handle (%{type: :NewAccountFee} = msg) do
-		Bullet.pub({:user, msg.user_id, msg.currency}, publify(msg))
+		profily("publification of #{msg.type}",fn -> Bullet.pub({:user, msg.user_id, msg.currency}, publify(msg)) end)
+		# Bullet.pub({:user, msg.user_id, msg.currency}, publify(msg))
 	end
 
 	def handle(nil) do 

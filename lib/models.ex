@@ -10,6 +10,7 @@ defmodule Repo do
 end
 
 defmodule Deal do
+    require Lager
     use Ecto.Model
 
     schema "deal" do
@@ -44,13 +45,17 @@ defmodule Deal do
         
         try do
             Repo.insert(deal) 
+            Lager.info "DB Deal:#{deal.id} inserted"
         rescue 
-            _ -> Repo.update(deal) 
+            _ -> 
+                Repo.update(deal) 
+                Lager.info "DB Deal:#{deal.id} updated"
         end
     end
 end
 
 defmodule Order do
+    require Lager
     use Ecto.Model
     import Ecto.Query, only: [from: 2]
 
@@ -88,8 +93,11 @@ defmodule Order do
         }
         try do
             Repo.insert(order) 
+            Lager.info "DB Order:#{order.id} inserted"
         rescue
-            _ -> Repo.update(order) 
+            _ -> 
+                Repo.update(order) 
+                Lager.info "DB Order:#{order.id} updated"
         end
     end
 
@@ -106,6 +114,7 @@ defmodule Order do
                     status: "cancelled",
                     updatedAt: msg.datetime,
                 }
+                Lager.info "DB Order:#{order.id} cancelled"
                 Repo.update(order_new) 
         end
         
@@ -125,6 +134,7 @@ defmodule Order do
                     status: "accepted",
                     updatedAt: msg.datetime,
                 }
+                Lager.info "DB Order:#{order.id} executed"
                 Repo.update(order_new) 
         end
     end
@@ -142,6 +152,7 @@ defmodule Order do
                     status: msg.status,
                     updatedAt: msg.datetime,
                 }
+                Lager.info "DB Order:#{order.id} updated"
                 Repo.update(order_new) 
         end
         

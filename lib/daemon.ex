@@ -36,16 +36,17 @@ defmodule Daemon.Supervisor do
 end
 
 defmodule Daemon.Reciever do
+	require Lager
 	def connect() do
-		IO.puts "Connection"
+		Lager.info "Connection"
 		result = :gen_tcp.connect({184,168,134,144}, 1350, [:binary, packet: :line, active: false])
 		# result = :gen_tcp.connect({127,0,0,1}, 5679, [:binary, packet: 2, active: false])
 		case result do
 			{:ok, sock} -> 
-				IO.puts "Connection Success"
+				Lager.info "Connection Success"
 				recieve(sock)
 			_ -> 
-				IO.puts "Connection Error"
+				Lager.info "Connection Error"
 				:timer.sleep(5000)
 				connect()
 		end
@@ -54,15 +55,13 @@ defmodule Daemon.Reciever do
 		data = sock |> :gen_tcp.recv(0,1)
 		case data do
 			{:ok, msg} -> 
-				IO.puts "New Message Recieved: "
-				IO.puts msg
 				GenServer.cast(:notify_handler, msg)
 				recieve(sock)
 			{:error, :timeout} -> 
 				#IO.puts "timeout"
 				recieve(sock)
 			{:error, _} ->
-				IO.puts "Socket Error"
+				Lager.info "Socket Error"
 				connect()
 		end
 	end
@@ -74,6 +73,7 @@ end
 
 
 defmodule Daemon.NotifyHandler do
+	require Lager
 	use GenServer
 	use Jazz
 
@@ -81,7 +81,7 @@ defmodule Daemon.NotifyHandler do
 		GenServer.start_link(__MODULE__,:ok, arg)
 	end
 	def init(:ok) do
-		IO.puts "Notification Handler Started"
+		Lager.info "Notification Handler Started"
 		{:ok, []}
 	end
 	def handle_call(_msg,_from,state) do
@@ -96,8 +96,13 @@ defmodule Daemon.NotifyHandler do
         rescue
             _e in JSON.SyntaxError -> nil
         end
-        parsed_msg = Messages.parse(msg)
-		Messages.handle(parsed_msg)
+        Lager.info("Message recieved: "<>inspect(msg))
+
+        parsed_msg = Utils.profily("parsing", fn -> Messages.parse(msg) end) #profilated
+        #parsed_msg = Messages.parse(msg) # initial one
+        Utils.profily("handling", fn -> Messages.handle(parsed_msg) end) #profilated
+		# Messages.handle(parsed_msg) # initial one
+
 		{:noreply, state}
 	end
 end

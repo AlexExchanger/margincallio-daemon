@@ -1,6 +1,6 @@
 import ExPrintf
 defmodule Utils do
-
+	require Lager
 	
 	def stringify(nil, _) do
 		nil
@@ -29,5 +29,14 @@ defmodule Utils do
 	end
 	def decimalify(_) do
 		nil
+	end
+
+	def profily(action,func) do
+		Lager.info String.capitalize(action)<>" started"
+		{start_timer, _} = :erlang.statistics(:wall_clock)
+		result = func.()
+		{end_timer, _} = :erlang.statistics(:wall_clock)
+		Lager.info String.capitalize(action)<>" ended in #{end_timer-start_timer} milliseconds"
+		result
 	end
 end
