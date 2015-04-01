@@ -14,7 +14,7 @@ defmodule Daemon.Mixfile do
   def application do
     [
       mod: { Daemon, [] }, 
-      applications: [:exlager,:jazz,:postgrex, :ecto,:cowboy, :gproc]
+      applications: [:exlager, :jazz,:postgrex, :ecto,:cowboy, :gproc]
     ]
   end
 
