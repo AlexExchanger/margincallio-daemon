@@ -37,6 +37,8 @@ end
 
 defmodule Daemon.Reciever do
 	require Lager
+	use Jazz
+
 	def connect() do
 		Lager.info "Connection"
 		result = :gen_tcp.connect({184,168,134,144}, 1350, [:binary, packet: :line, active: false])
@@ -56,7 +58,8 @@ defmodule Daemon.Reciever do
 		case data do
 			{:ok, msg} -> 
 				Lager.info("Message recieved: "<>inspect(msg))
-				GenServer.cast(:notify_handler, msg)
+				handle(msg)
+				# GenServer.cast(:notify_handler, msg)
 				recieve(sock)
 			{:error, :timeout} -> 
 				#IO.puts "timeout"
@@ -67,6 +70,16 @@ defmodule Daemon.Reciever do
 		end
 	end
 	
+	def handle(msg) do
+		msg = try do
+            JSON.decode!(json_msg)
+        rescue
+            _e in JSON.SyntaxError -> nil
+        end
+        parsed_msg = Utils.profily("parsing", fn -> Messages.parse(msg) end) #profilated
+        #parsed_msg = Messages.parse(msg) # initial one
+        Utils.profily("handling", fn -> Messages.handle(parsed_msg) end) #profilated
+	end
 end
 
 
