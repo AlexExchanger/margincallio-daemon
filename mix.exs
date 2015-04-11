@@ -31,7 +31,7 @@ defmodule Daemon.Mixfile do
     [
       {:jazz, github: "meh/jazz"},
       {:postgrex, ">= 0.0.0"},
-      {:ecto, "~> 0.2.0"},
+      {:ecto, "~> 0.10.1"},
       {:bullet, github: "extend/bullet"},
       {:gproc, github: "uwiger/gproc"},
       {:exprintf, github: "parroty/exprintf"},

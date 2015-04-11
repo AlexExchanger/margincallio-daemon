@@ -70,7 +70,7 @@ defmodule Daemon.Reciever do
 		end
 	end
 	
-	def handle(msg) do
+	def handle(json_msg) do
 		msg = try do
             JSON.decode!(json_msg)
         rescue
