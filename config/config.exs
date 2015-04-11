@@ -6,6 +6,13 @@ config :exlager,
       level: :debug,
       truncation_size: 8096
 
+config :daemon, Repo,
+  adapter: Ecto.Adapters.Postgres,
+  database: "exchange",
+  username: "postgres",
+  password: "password"
+
+
 
 # This configuration is loaded before any dependency and is restricted
 # to this project. If another project depends on this project, this

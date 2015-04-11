@@ -1,12 +1,7 @@
 import Utils
 
 defmodule Repo do
-  use Ecto.Repo, adapter: Ecto.Adapters.Postgres
-  import Ecto.Query, only: [from: 2]
-
-  def conf do
-    parse_url "ecto://postgres:password@localhost/exchange"
-  end
+  use Ecto.Repo, otp_app: :daemon
 end
 
 defmodule Deal do
