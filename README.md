@@ -15,6 +15,7 @@ Installation:
 
 - Specifications of all messages are presented in a .docx file. All messages are presented, but in general instruction is written in Russian. Translation is in progress.
 
+- IP address and port of core connection is harcodec in lib/daemon.ex on line 44 :-)
 
 Todolist:
 
