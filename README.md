@@ -17,6 +17,8 @@ Installation:
 
 - IP address and port of core connection is harcodec in lib/daemon.ex on line 44 :-)
 
+- DB setting are presented in  /config/config.exs file
+
 Todolist:
 
 - add users autentification (now everybody can subscribe on everybody's channel)
