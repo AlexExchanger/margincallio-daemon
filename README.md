@@ -13,6 +13,8 @@ Installation:
 
 - localhost:8000 Presenting a simple page where all notifications are sent to dev console)
 
+- Specifications of all messages are presented in a .docx file. All messages are presented, but in general instruction is written in Russian. Translation is in progress.
+
 
 Todolist:
 
