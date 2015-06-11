@@ -8,9 +8,9 @@ config :exlager,
 
 config :daemon, Repo,
   adapter: Ecto.Adapters.Postgres,
-  database: "exchange",
-  username: "postgres",
-  password: "password"
+  database: "exchange_stock",
+  username: "admin",
+  password: "1"
 
 
 

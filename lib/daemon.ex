@@ -41,7 +41,7 @@ defmodule Daemon.Reciever do
 
 	def connect() do
 		Lager.info "Connection"
-		result = :gen_tcp.connect({184,168,134,144}, 1350, [:binary, packet: :line, active: false])
+		result = :gen_tcp.connect({52,28,120,92}, 1350, [:binary, packet: :line, active: false])
 		# result = :gen_tcp.connect({127,0,0,1}, 5679, [:binary, packet: 2, active: false])
 		case result do
 			{:ok, sock} -> 
